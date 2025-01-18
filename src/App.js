@@ -1,23 +1,14 @@
-import { BarChart } from '@mui/x-charts'
 import React from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 export default function App() {
   return (
-    <BarChart
-  xAxis={[
-    {
-      id: 'barCategories',
-      data: ['bar A', 'bar B', 'bar C'],
-      scaleType: 'band',
-    },
-  ]}
-  series={[
-    {
-      data: [2, 5, 3],
-    },
-  ]}
-  width={500}
-  height={300}
-/>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<div>main</div>} />
+        <Route path='/login' element={<div>login</div>} />
+        <Route path='/register' element={<div>register</div>} />
+      </Routes>
+    </BrowserRouter>
   )
 }
