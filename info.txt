@@ -1,0 +1,2 @@
+Authentification API = https://dummyjson.com/users
+Palette Color = https://coolors.co/c9f2fd-fbfdff-9ed2f0-1f2029-33343c
