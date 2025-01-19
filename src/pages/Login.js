@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import LoginIcon from '@mui/icons-material/Login';
 import EmailIcon from '@mui/icons-material/Email';
 import LockIcon from '@mui/icons-material/Lock';
@@ -6,9 +6,22 @@ import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded';
 import GoogleIcon from '@mui/icons-material/Google';
 import AppleIcon from '@mui/icons-material/Apple';
 import { Button } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginAsync } from '../features/auth/authSlice';
 
 
 export default function Login() {
+
+    const dispatch = useDispatch()
+    const state = useSelector(state => state.auth)
+
+    useEffect(() => {
+        dispatch(loginAsync({email: "emily.johnson@x.dummyjson.com", password: "emilyspass"}))
+    }, [dispatch])
+
+  
+ // return isLoading ...
+
   return (
     <div className='min-h-screen bg-gradient-to-tl from-light_cyan-600 to-light_cyan-900 flex items-center justify-center'>
         <div className='bg-gradient-to-b to-white-500 from-light_cyan-800 w-[450px] border border-gray-300 rounded-xl drop-shadow flex flex-col items-center justify-center gap-5 p-6'>
