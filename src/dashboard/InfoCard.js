@@ -1,9 +1,9 @@
 import { Card, CardContent, Typography } from '@mui/material'
 import React from 'react'
 
-export default function InfoCard({head,number,icon, titleSize = "h3", flex, className = ""}) {
+export default function InfoCard({head,number,icon, titleSize = "h3", flex, className = "", color = 'black'}) {
   return (
-       <Card sx={{flex:flex , boxShadow: "none", borderRadius: 5}} className={'*:drop-shadow-lg ' + className}>
+       <Card sx={{flex:flex , boxShadow: "none", borderRadius: 5,color:color}} className={'*:drop-shadow-lg ' + className}>
           <CardContent>
         <div className='flex items-center justify-between'>
         <Typography gutterBottom sx={{ color: 'text.secondary', fontSize: 20 }}>

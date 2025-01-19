@@ -6,53 +6,53 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Button, IconButton } from '@mui/material';
-import { FaDeleteLeft, FaTrash } from 'react-icons/fa6';
+import {  IconButton } from '@mui/material';
+import {  FaTrash } from 'react-icons/fa6';
+import { useSelector } from 'react-redux';
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-
-];
 
 export default function HistoryTable() {
+
+  const {history} = useSelector(state => state.sold)
+  const sortedHistory = [...history].sort((a, b) => new Date(b.date) - new Date(a.date));
+
   return (
-    <TableContainer component={Paper} sx={{boxShadow: "none",borderRadius:5}}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Raison</TableCell>
-            <TableCell align="right">Incomes</TableCell>
-            <TableCell align="right">Outcomes</TableCell>
-            <TableCell align="right">Action</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow
-              key={row.name}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">
-                <IconButton variant='contained' color='error' >
-                    <FaTrash />
-                </IconButton>
-              </TableCell>
-       
+
+      <TableContainer component={Paper} sx={{boxShadow: "none",borderRadius:5}}>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell >Raison</TableCell>
+              <TableCell >Amount</TableCell>
+              <TableCell >Date</TableCell>
+              <TableCell ></TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {sortedHistory.map((row, key) => (
+              <TableRow
+                key={key}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                className={ row.type === "outcome" ?  '*:bg-[#dd3369] ' : "bg-[#4aad9b]"}
+              >
+                <TableCell component="th" scope="row">
+                  {row.raison}
+                </TableCell>
+                <TableCell  >{row.type === "income" ? "+ " + row.amount : "- " + row.amount} $</TableCell>
+                <TableCell >{row.date}</TableCell>
+                <TableCell align="right">
+                  <IconButton size='small' variant='contained'  >
+                      <FaTrash size={14} />
+                  </IconButton>
+                </TableCell>
+        
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+
+
+
   );
 }

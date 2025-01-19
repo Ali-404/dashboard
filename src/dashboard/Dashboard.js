@@ -7,8 +7,17 @@ import {  FaHandHoldingDollar, FaMoneyBillTransfer, FaMoneyBillTrendUp, FaSackXm
 import HistoryTable from './HistoryTable'
 import Pie from './Pie'
 import SoldChart from './SoldChart'
+import { useDispatch, useSelector } from 'react-redux'
+import { getTotal } from '../features/sold/soldSlice'
 
 export default function Dashboard() {
+
+  const dispatch = useDispatch();
+
+
+  const totalIncomes = useSelector(state => getTotal(state, "income"))
+  const totalOutcomes = useSelector(state => getTotal(state, "outcome"))
+
   return (
     <Container className='flex flex-col gap-4 px-4 md:px-10' >
       <Nav />
@@ -16,17 +25,17 @@ export default function Dashboard() {
       {/* top */}
       <div className='flex items-center gap-4  flex-wrap justify-center flex-col md:flex-row'>
         <div className='md:flex-1'>
-        <InfoCard  titleSize="h1" flex={0.8} head={"Sold"} icon={<FaWallet />} number={"100 $"}/>
+        <InfoCard color={ (totalIncomes - totalOutcomes) < 0 ? "#dd3369" : (totalIncomes - totalOutcomes) === 0 ? "black" : "#4aad9b"  } titleSize="h1" flex={0.8} head={"Sold"}  icon={<FaWallet />} number={(totalIncomes - totalOutcomes) + " $"}/>
         </div>
        
        <div className='flex flex-col md:gap-4 flex-[0.3]'>
-         <InfoCard head={"Incomes"} number={"+60.00 $"} icon={<FaMoneyBillTrendUp />} />
-         <Button startIcon={<FaHandHoldingDollar />} variant='contained' color='success' sx={{borderRadius:50}} className='w-full'>Add Incomes +</Button>
+         <InfoCard head={"Incomes"} number={`+${totalIncomes} $`} icon={<FaMoneyBillTrendUp />} />
+         <Button startIcon={<FaHandHoldingDollar />} variant='contained'  sx={{borderRadius:50, backgroundColor: "#4aad9b"}} className='w-full'>Add Incomes +</Button>
        </div>
        
        <div className='flex flex-col md:gap-4 flex-[0.3]'>
-        <InfoCard head={"Outcomes"} number={"-50.00 $"} icon={<FaSackXmark />} />
-         <Button startIcon={<FaMoneyBillTransfer />} variant='contained' color='error' sx={{borderRadius:50}} className='w-full '>Add Outcomes -</Button>
+        <InfoCard head={"Outcomes"} number={`-${totalOutcomes} $`} icon={<FaSackXmark />} />
+         <Button startIcon={<FaMoneyBillTransfer />} variant='contained' sx={{borderRadius:50, backgroundColor: "#dd3369"}}  className='w-full '>Add Outcomes -</Button>
 
        </div>
       </div>
