@@ -28,20 +28,20 @@ const soldSlice = createSlice({
     name: "Sold",
     initialState,
     reducers:{
-        addIncome: (state, payload) => {
+        addIncome: (state, {payload}) => {
             state.history = [...state.history, {
                 type: "income",
                 raison: payload.raison,
                 amount: payload.amount,
-                date: new Date().toISOString().split("T")[0]
+                date: payload.date ?? new Date().toISOString().split("T")[0]
             }]
         },
-        addOutcome:(state, payload) => {
+        addOutcome:(state, {payload}) => {
             state.history = [...state.history, {
                 type: "outcome",
                 raison: payload.raison,
                 amount: payload.amount,
-                date: new Date().toISOString().split("T")[0]
+                date:payload.date ?? new Date().toISOString().split("T")[0]
             }]
         },
 
@@ -53,9 +53,9 @@ const soldSlice = createSlice({
 
 export const getTotal = (state, type) => {
     if (!state.sold.history || state.sold.history.length === 0) return 0;
-    return state.sold.history
+    return Number(state.sold.history
       .filter((el) => el.type === type)
-      .reduce((total, el) => total + el.amount, 0);
+      .reduce((total, el) => total + Number(el.amount), 0));
 };
 
 
