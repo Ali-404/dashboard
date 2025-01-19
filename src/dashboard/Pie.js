@@ -1,4 +1,4 @@
-import * as React from 'react';
+import  React from 'react';
 import { PieChart } from '@mui/x-charts/PieChart';
 import { useSelector } from 'react-redux';
 import { getTotal } from '../features/sold/soldSlice';

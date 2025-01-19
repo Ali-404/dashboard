@@ -31,7 +31,10 @@ export default function AddModel({open, handleClose = () => {},type}) {
     
     const handleSubmit = (e) => {
         e.preventDefault();
-
+        if (isNaN(amount)){
+            alert("Invalid Amount !")
+            return;
+        }
         switch (type) {
             case "Income":
                 dispatch(addIncome({amount, raison, date}))
@@ -64,7 +67,7 @@ export default function AddModel({open, handleClose = () => {},type}) {
         </div>
           <form className='w-full mt-4 flex flex-col gap-2' onSubmit={handleSubmit}>
             
-            <TextField  onChange={(e) => setAmount(e.target.value)} required color='success' label="Amount" type='number' variant="outlined" />
+            <TextField  onChange={(e) => setAmount(Number(e.target.value).toFixed(2))} required color='success' label="Amount"  variant="outlined" />
             
             <TextField  onChange={(e) => setRaison(e.target.value)} required color='success' label="Raison"  multiline minRows={4} variant="outlined" />
             
