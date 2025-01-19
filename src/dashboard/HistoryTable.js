@@ -25,7 +25,7 @@ export default function HistoryTable() {
               <TableCell >Raison</TableCell>
               <TableCell >Amount</TableCell>
               <TableCell >Date</TableCell>
-              <TableCell ></TableCell>
+              {/* <TableCell ></TableCell> */}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -40,12 +40,12 @@ export default function HistoryTable() {
                 </TableCell>
                 <TableCell  >{row.type === "income" ? "+ " + row.amount : "- " + row.amount} $</TableCell>
                 <TableCell >{row.date}</TableCell>
-                <TableCell align="right">
+                {/* <TableCell align="right">
                   <IconButton size='small' variant='contained'  >
                       <FaTrash size={14} />
                   </IconButton>
                 </TableCell>
-        
+         */}
               </TableRow>
             ))}
           </TableBody>
