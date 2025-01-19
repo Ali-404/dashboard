@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import LoginIcon from '@mui/icons-material/Login';
 import EmailIcon from '@mui/icons-material/Email';
 import LockIcon from '@mui/icons-material/Lock';
 import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded';
 import GoogleIcon from '@mui/icons-material/Google';
 import AppleIcon from '@mui/icons-material/Apple';
-import { Button } from '@mui/material';
+import { Button, CircularProgress  } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginAsync } from '../features/auth/authSlice';
 
@@ -13,12 +13,32 @@ import { loginAsync } from '../features/auth/authSlice';
 export default function Login() {
 
     const dispatch = useDispatch()
-    const state = useSelector(state => state.auth)
+    const {error, loading, user} = useSelector(state => state.auth)
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [isDisabled, setIsDisabled] = useState(false)
 
-    useEffect(() => {
-        dispatch(loginAsync({email: "emily.johnson@x.dummyjson.com", password: "emilyspass"}))
-    }, [dispatch])
-
+    
+    const loginCheck = async () => {
+        if (!email || !password) {
+            alert('Please fill in all fields.');
+            return;
+        }
+    
+        setIsDisabled(true);
+    
+        try {
+            await dispatch(loginAsync({ email, password })).unwrap(); // `unwrap` will throw an error if the action fails
+            if (user) {
+                window.location.href = '/';
+            }
+        } catch (err) {
+            console.error('Login failed:', err); // Optional: Log error for debugging
+            alert('Login failed. Please check your informations.');
+        } finally {
+            setIsDisabled(false);
+        }
+    };
   
  // return isLoading ...
 
@@ -33,16 +53,21 @@ export default function Login() {
             <div className='flex flex-col items-center justify-center gap-2 w-full px-5'>
                 <div className='w-full h-9 bg-gray-200 flex items-center justify-center gap-1 rounded-lg px-2'>
                     <EmailIcon className='text-gray-500' />
-                    <input type='email' placeholder='Email' className='bg-gray-200 placeholder:text-gray-500 focus:outline-none flex-1' />
+                    <input type='email' placeholder='Email' onChange={(e) =>setEmail(e.target.value)} className='bg-gray-200 placeholder:text-gray-500 focus:outline-none flex-1' />
                 </div>
                 <div className='w-full h-9 bg-gray-200 flex items-center justify-center gap-1 rounded-lg px-2'>
                     <LockIcon className='text-gray-500'/>
-                    <input type='password' placeholder='Password' className='bg-gray-200 placeholder:text-gray-500 focus:outline-none flex-1'/>
+                    <input type='password' placeholder='Password' onChange={(e) =>setPassword(e.target.value)} className='bg-gray-200 placeholder:text-gray-500 focus:outline-none flex-1'/>
                 </div>
                 <p className='self-end text-sm'>Forgot password?</p>
             </div>
             <div className='flex flex-col items-center justify-center gap-3 w-full px-5'>
-                <Button variant='contained' color='error' sx={{backgroundColor:"black", color:"white"}} className='w-full h-10 rounded-lg'>Get Started</Button>
+                {error && (
+                    <p className="text-red-500 text-sm">
+                        {error || 'Something went wrong. Please try again.'}
+                    </p>
+                )}
+                <Button variant='contained' color='error' sx={{backgroundColor:"black", color:"white"}} className='w-full h-10 rounded-lg' onClick={()=>loginCheck()} disabled={loading || isDisabled}>{loading ? <CircularProgress size={20} color="inherit" /> : 'Get Started'}</Button>
                 <div className='flex flex-row items-center justify-center gap-2'>
                     <hr className='border border-gray-300 w-28'/>
                     <small className='text-gray-500'>Or sign in with</small>
