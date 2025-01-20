@@ -19,7 +19,7 @@ export default function Nav() {
   
   return (
     <div className='flex items-center gap-2 justify-between py-4'>
-      <Typography variant='h5'>LOGO</Typography>
+      <Typography variant='h5'>Dashboard</Typography>
       <div>
       <Tooltip title="Convert Currency">
       {loading ? (
@@ -35,7 +35,7 @@ export default function Nav() {
       {user ? (
         <>
         <Typography variant='button' >{user.username}</Typography>
-        <Avatar sx={{ width: 32, height: 32 }}  alt="Remy Sharp" src={user.image} />
+        <Avatar sx={{ width: 32, height: 32 }}   src={user.image} />
         <IconButton LinkComponent={Link}   >
             <FaDoorOpen /> 
         </IconButton>

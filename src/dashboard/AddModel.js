@@ -31,17 +31,18 @@ export default function AddModel({open, handleClose = () => {},type}) {
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (isNaN(amount)){
+        if (isNaN(amount) || amount <= 0){
             alert("Invalid Amount !")
             return;
         }
+        
         switch (type) {
             case "Income":
                 dispatch(addIncome({amount, raison, date}))
                 break;
-                case "Outcome":
-                dispatch(addOutcome({amount, raison, date}))
-                break;
+            case "Outcome":
+              dispatch(addOutcome({amount, raison, date}))
+              break;
             default:
                 break;
         }

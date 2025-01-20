@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux';
 
 export default function HistoryTable() {
 
+  const {currency, rate} = useSelector(state => state.currency)
   const {history} = useSelector(state => state.sold)
   const sortedHistory = [...history].sort((a, b) => new Date(b.date) - new Date(a.date));
 
@@ -38,7 +39,7 @@ export default function HistoryTable() {
                 <TableCell component="th" scope="row">
                   {row.raison}
                 </TableCell>
-                <TableCell  >{row.type === "income" ? "+ " + row.amount : "- " + row.amount} $</TableCell>
+                <TableCell  >{row.type === "income" ? "+ " + (row.amount * rate).toFixed(2) : "- " + (row.amount * rate).toFixed(2)} {currency}</TableCell>
                 <TableCell >{row.date}</TableCell>
                 {/* <TableCell align="right">
                   <IconButton size='small' variant='contained'  >

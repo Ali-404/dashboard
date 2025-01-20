@@ -1,7 +1,12 @@
 import { Card, CardContent, Typography } from '@mui/material'
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 export default function InfoCard({head,number,icon, titleSize = "h3", flex, className = "", color = 'black'}) {
+  
+  const {currency, rate} = useSelector(state => state.currency)
+  
+  
   return (
        <Card sx={{flex:flex , boxShadow: "none", borderRadius: 5,color:color}} className={'*:drop-shadow-lg ' + className}>
           <CardContent>
@@ -13,7 +18,7 @@ export default function InfoCard({head,number,icon, titleSize = "h3", flex, clas
         </div>
        
         <Typography variant={titleSize} className='uppercase' component="div">
-         {number}
+         {head === "Incomes" ? "+" : head === "Outcomes" ? "-" : ""} {(Number(number) * rate).toFixed(2) } <small className='text-[20px]'>{currency}</small>
         </Typography>
         
       </CardContent>
