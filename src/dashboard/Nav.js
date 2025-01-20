@@ -43,8 +43,8 @@ export default function Nav() {
         <Typography variant='button' >{user.username}</Typography>
         <Avatar sx={{ width: 32, height: 32 }}   src={user.image} />
         <Tooltip title="Logout">
-          <IconButton LinkComponent={Link} to={"/login"}  >
-              <FaDoorOpen onClick={()=>logoutFunc()} /> 
+          <IconButton LinkComponent={Link} to={"/login"} onClick={()=>logoutFunc()}  >
+              <FaDoorOpen  /> 
           </IconButton>
 
         </Tooltip>
