@@ -4,6 +4,8 @@ import {FaCoins, FaDoorOpen, FaUser} from 'react-icons/fa6'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { changeCurrency } from '../features/currency/currencySlice'
+import { logOut } from '../features/auth/authSlice'
+
 export default function Nav() {
 
   const dispatch = useDispatch()
@@ -17,6 +19,11 @@ export default function Nav() {
     dispatch(changeCurrency(e.target.value))
   }
   
+  const logoutFunc = () =>{
+    dispatch(logOut)
+    window.location.href = "/login"
+  }
+
   return (
     <div className='flex items-center gap-2 justify-between py-4'>
       <Typography variant='h5'>Dashboard</Typography>
@@ -37,7 +44,7 @@ export default function Nav() {
         <Typography variant='button' >{user.username}</Typography>
         <Avatar sx={{ width: 32, height: 32 }}   src={user.image} />
         <IconButton LinkComponent={Link}   >
-            <FaDoorOpen /> 
+            <FaDoorOpen onClick={()=>logoutFunc()} /> 
         </IconButton>
         </>
       ) : (
