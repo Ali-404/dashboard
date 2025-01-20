@@ -23,7 +23,7 @@ export default function Nav() {
         <>
         <Typography variant='button' >{user.username}</Typography>
         <Avatar sx={{ width: 32, height: 32 }}  alt="Remy Sharp" src={user.image} />
-        <IconButton LinkComponent={<Link to={"/login"} />}  >
+        <IconButton LinkComponent={Link}   >
             <FaDoorOpen /> 
         </IconButton>
         </>
