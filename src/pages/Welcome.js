@@ -8,7 +8,7 @@ export default function Welcome() {
   return (
     <Dialog open={true} >
       <DialogTitle>
-        <Typography variant='h3'>Welcome {user.username} 🙋🏻‍♂️</Typography>
+        <Typography variant='h3'>Welcome {user.username} {user.gender === "male" ? "🙋🏻‍♂️" : "🙋🏻‍♀️"}</Typography>
       </DialogTitle>
       <DialogActions>
         <Button LinkComponent={Link} to="/" sx={{backgroundColor:"#4aad9b", color:"white"}} >Get Started</Button>
