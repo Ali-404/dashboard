@@ -65,4 +65,7 @@ export const loginAsync = createAsyncThunk(
     }
 )
 
+
+
 export default authSlice.reducer
+export const {logOut} = authSlice.actions
