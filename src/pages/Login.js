@@ -8,6 +8,7 @@ import AppleIcon from '@mui/icons-material/Apple';
 import { Button, CircularProgress  } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginAsync } from '../features/auth/authSlice';
+import Welcome from './Welcome';
 
 
 export default function Login() {
@@ -19,7 +20,8 @@ export default function Login() {
     const [isDisabled, setIsDisabled] = useState(false)
 
     
-    const loginCheck = async () => {
+    const loginCheck = (e) => {
+        e.preventDefault()
         if (!email || !password) {
             alert('Please fill in all fields.');
             return;
@@ -28,19 +30,14 @@ export default function Login() {
         setIsDisabled(true);
     
         try {
-            await dispatch(loginAsync({ email, password })).unwrap(); // `unwrap` will throw an error if the action fails
-            if (user) {
-                window.location.href = '/';
-            }
+            dispatch(loginAsync({ email, password }))
         } catch (err) {
-            console.error('Login failed:', err); // Optional: Log error for debugging
             alert('Login failed. Please check your informations.');
         } finally {
             setIsDisabled(false);
         }
     };
-  
- // return isLoading ...
+    
 
   return (
     <div className='min-h-screen bg-gradient-to-tl from-light_cyan-600 to-light_cyan-900 flex items-center justify-center'>
@@ -67,7 +64,7 @@ export default function Login() {
                         {error || 'Something went wrong. Please try again.'}
                     </p>
                 )}
-                <Button variant='contained' color='error' sx={{backgroundColor:"black", color:"white"}} className='w-full h-10 rounded-lg' onClick={()=>loginCheck()} disabled={loading || isDisabled}>{loading ? <CircularProgress size={20} color="inherit" /> : 'Get Started'}</Button>
+                <Button variant='contained' color='error' sx={{backgroundColor:"#4aad9b", color:"white"}} className='w-full h-10 rounded-lg' onClick={(e)=>loginCheck(e)} disabled={loading || isDisabled}>{loading ? <CircularProgress size={20} color="inherit" /> : 'Get Started'}</Button>
                 <div className='flex flex-row items-center justify-center gap-2'>
                     <hr className='border border-gray-300 w-28'/>
                     <small className='text-gray-500'>Or sign in with</small>
@@ -80,6 +77,7 @@ export default function Login() {
                 </div>
             </div>
         </div>
+        {user && <Welcome  />}
     </div>
   )
 }

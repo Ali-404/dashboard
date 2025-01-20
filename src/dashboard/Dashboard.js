@@ -13,6 +13,9 @@ import AddModel from './AddModel'
 
 export default function Dashboard() {
 
+
+  
+
   const [modalOpen ,setModalOpen] = useState(false)
   const [modalType ,setModalType] = useState("Income")
 
