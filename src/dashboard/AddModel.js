@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { TextField } from '@mui/material';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addIncome, addOutcome } from '../features/sold/soldSlice';
 import { FaMoneyBillTrendUp, FaSackXmark } from 'react-icons/fa6';
 
@@ -22,7 +22,6 @@ const style = {
 };
 
 export default function AddModel({open, handleClose = () => {},type}) {
-    
     const [amount, setAmount] = useState(0)
     const [raison, setRaison] = useState("")
     const [date, setDate] = useState(new Date().toISOString().split("T")[0])
