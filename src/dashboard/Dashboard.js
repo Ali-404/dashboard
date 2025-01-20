@@ -7,7 +7,7 @@ import {  FaHandHoldingDollar, FaMoneyBillTransfer, FaMoneyBillTrendUp, FaSackXm
 import HistoryTable from './HistoryTable'
 import Pie from './Pie'
 import SoldChart from './SoldChart'
-import { useDispatch, useSelector } from 'react-redux'
+import {  useSelector } from 'react-redux'
 import { getTotal } from '../features/sold/soldSlice'
 import AddModel from './AddModel'
 

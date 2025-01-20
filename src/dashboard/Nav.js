@@ -1,4 +1,4 @@
-import { Avatar, Button, CircularProgress, Drawer, FormControl, IconButton, InputLabel, MenuItem, Select, Tooltip, Typography } from '@mui/material'
+import { Avatar, CircularProgress, Drawer, FormControl, IconButton, InputLabel, MenuItem, Select, Tooltip, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import {FaCoins, FaDoorOpen, FaUser} from 'react-icons/fa6'
 import { useDispatch, useSelector } from 'react-redux'
@@ -20,8 +20,7 @@ export default function Nav() {
   }
   
   const logoutFunc = () =>{
-    dispatch(logOut)
-    window.location.href = "/login"
+    dispatch(logOut())
   }
 
   return (
@@ -43,9 +42,12 @@ export default function Nav() {
         <>
         <Typography variant='button' >{user.username}</Typography>
         <Avatar sx={{ width: 32, height: 32 }}   src={user.image} />
-        <IconButton LinkComponent={Link}   >
-            <FaDoorOpen onClick={()=>logoutFunc()} /> 
-        </IconButton>
+        <Tooltip title="Logout">
+          <IconButton LinkComponent={Link} to={"/login"}  >
+              <FaDoorOpen onClick={()=>logoutFunc()} /> 
+          </IconButton>
+
+        </Tooltip>
         </>
       ) : (
         <>

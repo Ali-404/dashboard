@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { TextField } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addIncome, addOutcome } from '../features/sold/soldSlice';
 import { FaMoneyBillTrendUp, FaSackXmark } from 'react-icons/fa6';
 
