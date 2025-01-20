@@ -13,7 +13,6 @@ import AddModel from './AddModel'
 
 export default function Dashboard() {
 
-
   
 
   const [modalOpen ,setModalOpen] = useState(false)
@@ -74,6 +73,8 @@ export default function Dashboard() {
 
     </Container>
        <AddModel open={modalOpen} handleClose={() => setModalOpen(false)} type={modalType} />
+
+     
        </>
   )
 }
