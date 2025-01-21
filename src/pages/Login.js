@@ -45,7 +45,7 @@ export default function Login() {
             <div className='w-14 h-14 bg-white shadow rounded-2xl flex items-center justify-center'><LoginIcon/></div>
             <div className='flex flex-col items-center justify-center gap-1'>
                 <h1 className='text-2xl font-bold'>Sign in with email</h1>
-                <p className='text-center text-gray-500 text-sm px-12'>Make a new doc to bring your words, data, and teams together. For free</p>
+                <p className='text-center text-gray-500 text-sm px-12'>Welcome! Login to Manage your finances.</p>
             </div>
             <div className='flex flex-col items-center justify-center gap-2 w-full px-5'>
                 <div className='w-full h-9 bg-gray-200 flex items-center justify-center gap-1 rounded-lg px-2'>
