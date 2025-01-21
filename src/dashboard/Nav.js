@@ -25,7 +25,7 @@ export default function Nav() {
 
   return (
     <div className='flex items-center gap-2 justify-between py-4'>
-      <Typography variant='h5'>Dashboard</Typography>
+      <Typography variant='h5'>Balance </Typography>
       <div>
       <Tooltip title="Convert Currency">
       {loading ? (
